@@ -6,10 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class UserList {
+public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String subject;
+    private String message;
 }

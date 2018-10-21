@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -151,11 +151,11 @@
 					</div>
 					<div class="col-md-10 col-md-offset-1 animate-box">
 						<h3>Get In Touch</h3>
-						<form action="#">
+						<form action="#" th:action="@{/contact}" th:object="${contact}" method="post">
 							<div class="row form-group">
 								<div class="col-md-6">
 									<label for="fname">First Name</label>
-									<input type="text" id="fname" class="form-control" placeholder="Your firstname">
+									<input type="text" th:field="*{firstName}" id="fname" class="form-control" placeholder="Your firstname">
 								</div>
 								<div class="col-md-6">
 									<label for="lname">Last Name</label>
