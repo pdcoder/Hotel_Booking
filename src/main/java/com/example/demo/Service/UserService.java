@@ -1,7 +1,8 @@
 package com.example.demo.Service;
 
 import com.example.demo.DAO.UserDao;
-import com.example.demo.Repository.UserRepository;
+import com.example.demo.Exceptions.EmailExistsException;
+import com.example.demo.Repository.UserLoginRepository;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,11 @@ import java.util.Arrays;
 @Service
 public class UserService implements UserServiceI {
     @Autowired
-    private UserRepository repository;
+    private UserLoginRepository repository;
 
     @Transactional
     @Override
-    public User registerNewUserAccount(UserDao accountDto)
-            throws EmailExistsException {
+    public User registerNewUserAccount(UserDao accountDto) throws EmailExistsException {
 
         if (emailExist(accountDto.getEmail())) {
             throw new EmailExistsException(
@@ -39,4 +39,6 @@ public class UserService implements UserServiceI {
         }
         return false;
     }
+
+
 }

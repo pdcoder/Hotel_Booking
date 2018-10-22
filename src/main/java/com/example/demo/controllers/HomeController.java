@@ -1,7 +1,9 @@
 package com.example.demo.controllers;
 
 import com.example.demo.DAO.UserDao;
-import com.example.demo.Repository.UserRepository;
+import com.example.demo.Exceptions.EmailExistsException;
+import com.example.demo.Repository.ContactRepository;
+import com.example.demo.Service.UserService;
 import com.example.demo.models.Contact;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,11 @@ import javax.validation.Valid;
 public class HomeController {
 
     @Autowired
-    UserRepository userRepository;
+    ContactRepository contactRepository;
+
+    @Autowired
+    UserService service;
+
     @GetMapping(value = "/")
     public String home()
     {
@@ -47,10 +53,11 @@ public class HomeController {
     @PostMapping(value = "/contact")
     public String contactSubmit(@ModelAttribute("contact") Contact contact)
     {
-        userRepository.save(contact);
+        contactRepository.save(contact);
         return "contact";
     }
 
+    @PostMapping(value = "/register")
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") @Valid UserDao accountDto,
             BindingResult result, WebRequest request, Errors errors) {
@@ -60,6 +67,12 @@ public class HomeController {
         }
         if (registered == null) {
             result.rejectValue("email", "message.regError");
+        }
+        if (result.hasErrors()) {
+            return new ModelAndView("registration", "user", accountDto);
+        }
+        else {
+            return new ModelAndView("successRegister", "user", accountDto);
         }
     }
 
