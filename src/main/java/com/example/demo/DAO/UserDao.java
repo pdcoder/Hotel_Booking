@@ -1,21 +1,17 @@
-package com.example.demo.models;
+package com.example.demo.DAO;
 
 import com.example.demo.Validation.PasswordMatches;
 import com.example.demo.Validation.ValidEmail;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@PasswordMatches
+public class UserDao {
+
     @NotNull
     @NotEmpty
     private String firstName;
@@ -25,6 +21,9 @@ public class User {
     @NotNull
     @NotEmpty
     private String address;
+    @NotNull
+    @NotEmpty
+    @ValidEmail
     private String email;
     @NotNull
     @NotEmpty
@@ -50,14 +49,6 @@ public class User {
 
     public void setPassword2(String password2) {
         this.password2 = password2;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -100,15 +91,5 @@ public class User {
         this.contactNumber = contactNumber;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                '}';
-    }
+
 }
