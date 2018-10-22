@@ -1,6 +1,12 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/header.html" :: header></head>
+<body>
 
+<div class="colorlib-loader"></div>
+
+<div id="page">
+	<nav th:insert="fragments/navbar.html" :: navbar></nav>
 		<aside id="colorlib-hero">
 			<div class="flexslider">
 				<ul class="slides">
