@@ -61,7 +61,7 @@ public class HomeController {
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") @Valid UserDao accountDto,
             BindingResult result, WebRequest request, Errors errors) {
-    User registered = new User();
+            User registered = new User();
         if (!result.hasErrors()) {
             registered = createUserAccount(accountDto, result);
         }
@@ -69,7 +69,7 @@ public class HomeController {
             result.rejectValue("email", "message.regError");
         }
         if (result.hasErrors()) {
-            return new ModelAndView("registration", "user", accountDto);
+            return new ModelAndView("register", "user", accountDto);
         }
         else {
             return new ModelAndView("successRegister", "user", accountDto);

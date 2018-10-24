@@ -12,12 +12,11 @@ import java.util.Arrays;
 
 
 @Service
-public class UserService implements UserServiceI {
+public class UserService  {
     @Autowired
     private UserLoginRepository repository;
 
     @Transactional
-    @Override
     public User registerNewUserAccount(UserDao accountDto) throws EmailExistsException {
 
         if (emailExist(accountDto.getEmail())) {
@@ -30,7 +29,10 @@ public class UserService implements UserServiceI {
         user.setPassword(accountDto.getPassword());
         user.setEmail(accountDto.getEmail());
         user.setRoles(Arrays.asList("ROLE_USER"));
+        if((emailExist(user.getEmail())))
         return repository.save(user);
+        else
+            return null;
     }
     private boolean emailExist(String email) {
         User user = repository.findByEmail(email);
