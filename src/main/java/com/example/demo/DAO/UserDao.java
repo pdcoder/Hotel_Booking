@@ -1,15 +1,14 @@
 package com.example.demo.DAO;
 
-import com.example.demo.Validation.PasswordMatches;
+import com.example.demo.Validation.ValidPassword;
 import com.example.demo.Validation.ValidEmail;
-
-import javax.persistence.Entity;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
-@PasswordMatches
+@Component
 public class UserDao {
 
     @NotNull
@@ -20,19 +19,14 @@ public class UserDao {
     private String lastName;
     @NotNull
     @NotEmpty
-    private String address;
+    private String emailId;
     @NotNull
     @NotEmpty
-    @ValidEmail
-    private String email;
-    @NotNull
-    @NotEmpty
-    private String contactNumber;
-    @NotNull
-    @NotEmpty
+    @ValidPassword
     private String password;
     @NotNull
     @NotEmpty
+    @ValidPassword
     private String password2;
 
     public String getPassword() {
@@ -67,28 +61,12 @@ public class UserDao {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public void setEmailId(String email) {
+        this.emailId = emailId;
     }
 
 

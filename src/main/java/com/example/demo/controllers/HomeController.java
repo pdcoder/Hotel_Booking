@@ -50,6 +50,14 @@ public class HomeController {
         return "register";
     }
 
+    @GetMapping(value = "/login")
+    public String login(Model model)
+    {
+        UserDao user = new UserDao();
+        model.addAttribute("user",user);
+        return "register";
+    }
+
     @PostMapping(value = "/contact")
     public String contactSubmit(@ModelAttribute("contact") Contact contact)
     {
@@ -69,10 +77,11 @@ public class HomeController {
             result.rejectValue("email", "message.regError");
         }
         if (result.hasErrors()) {
+            System.out.println(result.getAllErrors());
             return new ModelAndView("register", "user", accountDto);
         }
         else {
-            return new ModelAndView("successRegister", "user", accountDto);
+            return new ModelAndView("index", "user", accountDto);
         }
     }
 
@@ -84,5 +93,10 @@ public class HomeController {
             return null;
         }
         return registered;
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "/error/access-denied";
     }
 }

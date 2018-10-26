@@ -1,0 +1,1 @@
+INSERT INTO user(firstName,lastName,email,contactNumber,password) VALUES('Prakash','Das','pd@gmail.com','9873663','pdcoder');
